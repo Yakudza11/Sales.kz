@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Sales Counter</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Raleway:wght@800&display=swap'); /* Красивые шрифты */
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            font-size: 48px;
+            color: white;
+            background: linear-gradient(45deg, #009e9d, #005f5e, #02c39a);
+            background-size: 200% 200%;
+            animation: gradient-animation 6s infinite;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes gradient-animation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        #header {
+            margin-top: 50px;
+            font-size: 50px;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 800;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        #earnings {
+            font-size: 90px;
+            font-weight: bold;
+            margin: 0;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.4);
+            transition: transform 0.5s ease, color 0.5s ease; /* Анимация изменения суммы */
+        }
+
+        #footer {
+            font-size: 36px;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 800;
+            margin-top: 20px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <!-- Заголовок -->
+    <div id="header">Продажи на общую сумму за сегодня</div>
+
+    <!-- Сумма -->
+    <div id="earnings">500,000</div>
+
+    <!-- Футер -->
+    <div id="footer">TrustMe</div>
+
+    <script>
+        // Начальная сумма
+        let totalEarnings = 500000;
+
+        // Новая сумма для добавления (не отображается в интерфейсе)
+        let additionalAmount = 450000;
+
+        // Функция для обновления суммы с анимацией
+        function updateEarnings() {
+            const earningsElement = document.getElementById('earnings');
+            const previousValue = totalEarnings;
+            totalEarnings += additionalAmount;
+
+            // Анимация изменения суммы
+            earningsElement.style.transform = 'scale(1.2)';
+            earningsElement.style.color = '#02c39a';
+            setTimeout(() => {
+                earningsElement.style.transform = 'scale(1)';
+                earningsElement.style.color = 'white';
+            }, 500);
+
+            // Обновляем текст с новой суммой
+            earningsElement.textContent = totalEarnings.toLocaleString('en-US');
+        }
+
+        // Запускаем обновление суммы после загрузки страницы
+        window.onload = () => {
+            setTimeout(updateEarnings, 1000); // Обновляем через 1 секунду
+        };
+    </script>
+</body>
+</html>
